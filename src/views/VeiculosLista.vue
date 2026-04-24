@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 import { useTransporteStore } from '@/stores/useTransporteStore';
 import AppHeader from '@/components/AppHeader.vue';
 import AppBottomNavigationBar from '@/components/AppBottomNavigationBar.vue';
+import { useRouter } from 'vue-router';
 
 const store = useTransporteStore();
 const busca = ref('');
@@ -20,6 +21,12 @@ const veiculosFiltrados = computed(() => {
     return correspondeBusca && correspondeFiltro;
   });
 });
+
+const router = useRouter();
+const cadastrar = () => {
+  router.push('/veiculos/novo');
+};
+
 </script>
 
 <template>
@@ -61,7 +68,7 @@ const veiculosFiltrados = computed(() => {
           
           <div class="card-details">
             <div class="detail-item">
-              <span class="mdi mdi-account-group-outline" style="color: #000000;"></span>
+              <span class="mdi mdi-seat-passenger" style="color: #000000;"></span>
               <span>{{ veiculo.capacidade }} Lugares </span>
             </div>
             <div class="detail-item">
@@ -77,7 +84,7 @@ const veiculosFiltrados = computed(() => {
       </div>
     </div>
 
-    <button class="fab-add">
+    <button class="fab-add" @click="cadastrar">
       <span class="mdi mdi-plus"></span>
     </button>
 
