@@ -1,13 +1,12 @@
 <script setup>
-
+import AppHeader from './components/AppHeader.vue';
+import AppBottomNavigationBar from './components/AppBottomNavigationBar.vue';
 </script>
 
 <template>
-  
-  <RouterView />
+  <div id="app">
+    <AppHeader />
+    <router-view />
+    <AppBottomNavigationBar />
+  </div>
 </template>
-
-<style scoped>
-
-
-</style>
