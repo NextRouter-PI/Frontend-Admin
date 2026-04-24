@@ -88,13 +88,12 @@ const veiculosFiltrados = computed(() => {
 <style scoped>
 /* O design exato que você pediu */
 .view-wrapper {
-  background-color: #f8f9fa;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
+  padding: 80px 0
 }
 
 .content { 
-  padding: 16px; 
   padding-bottom: 120px; 
 }
 

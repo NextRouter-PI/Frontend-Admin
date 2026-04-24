@@ -1,5 +1,6 @@
 <script setup>
 import Logo from "@/assets/logo.png"
+import ThemeButton from "@/components/buttons/ThemeButton.vue"
 </script>
 
 <template>
@@ -7,6 +8,7 @@ import Logo from "@/assets/logo.png"
     <RouterLink to="/" class="logo">
       <img :src="Logo" alt="Logo">
     </RouterLink>
+    <ThemeButton />
   </header>
 </template>
 
