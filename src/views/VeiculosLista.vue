@@ -61,11 +61,11 @@ const veiculosFiltrados = computed(() => {
           
           <div class="card-details">
             <div class="detail-item">
-              <span class="mdi mdi-account-group-outline"></span>
-              <span>{{ veiculo.capacidade }} Lugares</span>
+              <span class="mdi mdi-account-group-outline" style="color: #000000;"></span>
+              <span>{{ veiculo.capacidade }} Lugares </span>
             </div>
             <div class="detail-item">
-              <span class="mdi mdi-account-outline"></span>
+              <span class="mdi mdi-account-outline" style="color: #000000;"></span>
               <span>{{ veiculo.motorista }}</span>
             </div>
           </div>
@@ -86,7 +86,6 @@ const veiculosFiltrados = computed(() => {
 </template>
 
 <style scoped>
-/* O design exato que você pediu */
 .view-wrapper {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
@@ -97,7 +96,6 @@ const veiculosFiltrados = computed(() => {
   padding-bottom: 120px; 
 }
 
-/* Busca */
 .search-container {
   position: relative;
   margin-bottom: 16px;
@@ -113,14 +111,13 @@ const veiculosFiltrados = computed(() => {
 
 .search-container input {
   width: 100%;
-  padding: 12px 12px 12px 44px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
+  padding: 10px 10px 10px 44px;
+  border-radius: 10px;
+  border: 1px solid #f97316;
   background-color: white;
   outline: none;
 }
 
-/* Filtros */
 .filter-chips {
   display: flex;
   gap: 8px;
@@ -141,13 +138,12 @@ const veiculosFiltrados = computed(() => {
   color: #f97316;
 }
 
-/* Card - Design Exato do Figma */
 .transport-card {
   background: white;
   border-radius: 16px;
   padding: 20px;
   margin-bottom: 14px;
-  border: 1px solid #f3f4f6;
+  border: 1px solid #000000;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
@@ -178,19 +174,17 @@ const veiculosFiltrados = computed(() => {
   color: #9ca3af;
 }
 
-/* Tags de Status */
 .status-tag {
   display: inline-block;
   padding: 4px 12px;
   border-radius: 8px;
-  font-size: 0.75rem;
+  font-size: 0.80rem;
   font-weight: 700;
 }
 
-.status-tag.ativo { background-color: #d1fae5; color: #065f46; }
-.status-tag.manutenção { background-color: #fee2e2; color: #991b1b; }
+.status-tag.ativo { background-color: #BDFFAF; color: #2BFF59; }
+.status-tag.manutenção { background-color: #FFBA70; color: #FF8E2B; }
 
-/* FAB - Botão Grafite */
 .fab-add {
   position: fixed;
   bottom: 100px;

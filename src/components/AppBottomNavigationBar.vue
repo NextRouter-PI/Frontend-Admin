@@ -4,23 +4,19 @@
 <template>
   <footer class="bottom-nav">
     <router-link :to="`/`" class="nav-item">
+      <span class="mdi mdi-bus"></span>
+    </router-link>
+
+    <router-link :to="`/mapa`" class="nav-item">
+      <span class="mdi mdi-map-outline"></span>
+    </router-link>
+
+    <router-link :to="`/home`" class="nav-item">
       <span class="mdi mdi-home"></span>
-      <small>Home</small>
     </router-link>
 
     <router-link :to="`/usuario`" class="nav-item">
-      <span class="mdi mdi-account"></span>
-      <small>Usuário</small>
-    </router-link>
-
-    <router-link :to="`/transporte`" class="nav-item">
-      <span class="mdi mdi-car"></span>
-      <small>Transporte</small>
-    </router-link>
-
-    <router-link :to="`/lista`" class="nav-item">
-      <span class="mdi mdi-format-list-bulleted"></span>
-      <small>Lista</small>
+      <span class="mdi mdi-account-circle"></span>
     </router-link>
   </footer>
 </template>
