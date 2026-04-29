@@ -1,6 +1,11 @@
 <script setup>
 import AppHeader from '@/components/AppHeader.vue';
 import { ref } from 'vue';
+import { useTransporteStore } from '@/stores/useTransporteStore';
+import {useRouter} from 'vue-router'
+
+const router = useRouter();
+const stores = useTransporteStore();
 
 const veiculo = ref({
     placa: '',
@@ -10,7 +15,8 @@ const veiculo = ref({
 });
 
 const salvar = () => {
-    console.log('Salvar veículo', veiculo.value);
+    stores.adicionarVeiculo({...veiculo.value});
+    router.push('/veiculos')
 }
 </script>
 
@@ -41,10 +47,9 @@ const salvar = () => {
                 </div>
             </form>
         </div>
-
-        <div class="salvar-cancelar">
-            <button type="button" class="cancelar" @click="$router.back()">Cancelar</button>
-            <button type="button" class="salvar" @click="salvar">Salvar</button>
+        <div class="actions">
+            <button type="button" class="cancelar" @click="$router.back()">CANCELAR</button>
+            <button type="button" class="salvar" @click="salvar">SALVAR</button>
         </div>
     </div>
 </template>
