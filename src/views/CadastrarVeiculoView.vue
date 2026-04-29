@@ -55,9 +55,5 @@ const salvar = () => {
 </template>
 
 <style scoped>
-.cadastrar-veiculo {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
+
 </style>

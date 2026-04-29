@@ -189,8 +189,8 @@ const cadastrar = () => {
   font-weight: 700;
 }
 
-.status-tag.ativo { background-color: #BDFFAF; color: #2BFF59; }
-.status-tag.manutenção { background-color: #FFBA70; color: #FF8E2B; }
+.status-tag.ativo { background-color: #BDFFAF; color: #000000; }
+.status-tag.manutenção { background-color: #FFBA70; color: #000000; }
 
 .fab-add {
   position: fixed;
