@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import VeiculosLista from '@/views/VeiculosLista.vue'
+import HomeView from '@/views/HomeView.vue'
+import TransportView from '@/views/TransportView.vue'
+import UserView from '@/views/UserView.vue'
 import CadastrarVeiculoView from '@/views/CadastrarVeiculoView.vue'
 
 const router = createRouter({
@@ -9,28 +12,28 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: VeiculosLista,
-    },
-    {
-      path: '/veiculos/novo',
-      name: '/CadastrarVeiculo',
-      component: CadastrarVeiculoView
+      component: HomeView,
     },
     {
       path: '/usuario',
       name: 'usuario',
-      component: VeiculosLista,
+      component: UserView,
     },
     {
       path: '/transporte',
       name: 'transporte',
-      component: VeiculosLista,
+      component: TransportView,
     },
     {
       path: '/lista',
       name: 'lista',
       component: VeiculosLista,
     },
+    {
+      path: '/cadastro-veiculo',
+      name: 'cadastro-veiculo',
+      component: CadastrarVeiculoView 
+    }
   ],
 })
 
