@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useTransporteStore } from '@/stores/useTransporteStore';
+import AppHeader from '@/components/AppHeader.vue';
+import AppBottomNavigationBar from '@/components/AppBottomNavigationBar.vue';
+import { useRouter } from 'vue-router';
 
 const store = useTransporteStore();
 const busca = ref('');
@@ -18,10 +21,18 @@ const veiculosFiltrados = computed(() => {
     return correspondeBusca && correspondeFiltro;
   });
 });
+
+const router = useRouter();
+const cadastrar = () => {
+  router.push('/veiculos/novo');
+};
+
 </script>
 
 <template>
   <div class="view-wrapper">
+    <AppHeader title="Veículos" show-back />
+
     <div class="content">
       <div class="search-container">
         <span class="mdi mdi-magnify search-icon"></span>
@@ -57,11 +68,11 @@ const veiculosFiltrados = computed(() => {
           
           <div class="card-details">
             <div class="detail-item">
-              <span class="mdi mdi-account-group-outline"></span>
-              <span>{{ veiculo.capacidade }} Lugares</span>
+              <span class="mdi mdi-seat-passenger" style="color: #000000;"></span>
+              <span>{{ veiculo.capacidade }} Lugares </span>
             </div>
             <div class="detail-item">
-              <span class="mdi mdi-account-outline"></span>
+              <span class="mdi mdi-account-outline" style="color: #000000;"></span>
               <span>{{ veiculo.motorista }}</span>
             </div>
           </div>
@@ -73,10 +84,11 @@ const veiculosFiltrados = computed(() => {
       </div>
     </div>
 
-    <button class="fab-add">
+    <button class="fab-add" @click="cadastrar">
       <span class="mdi mdi-plus"></span>
     </button>
 
+    <AppBottomNavigationBar />
   </div>
 </template>
 
@@ -106,9 +118,9 @@ const veiculosFiltrados = computed(() => {
 
 .search-container input {
   width: 100%;
-  padding: 12px 12px 12px 44px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
+  padding: 10px 10px 10px 44px;
+  border-radius: 10px;
+  border: 1px solid #f97316;
   background-color: white;
   outline: none;
 }
@@ -138,7 +150,7 @@ const veiculosFiltrados = computed(() => {
   border-radius: 16px;
   padding: 20px;
   margin-bottom: 14px;
-  border: 1px solid #f3f4f6;
+  border: 1px solid #000000;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
@@ -169,19 +181,17 @@ const veiculosFiltrados = computed(() => {
   color: #9ca3af;
 }
 
-/* Tags de Status */
 .status-tag {
   display: inline-block;
   padding: 4px 12px;
   border-radius: 8px;
-  font-size: 0.75rem;
+  font-size: 0.80rem;
   font-weight: 700;
 }
 
-.status-tag.ativo { background-color: #d1fae5; color: #065f46; }
-.status-tag.manutenção { background-color: #fee2e2; color: #991b1b; }
+.status-tag.ativo { background-color: #BDFFAF; color: #000000; }
+.status-tag.manutenção { background-color: #FFBA70; color: #000000; }
 
-/* FAB - Botão Grafite */
 .fab-add {
   position: fixed;
   bottom: 100px;
