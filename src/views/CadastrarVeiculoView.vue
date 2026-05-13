@@ -1,5 +1,4 @@
 <script setup>
-import AppHeader from '@/components/AppHeader.vue';
 import { ref } from 'vue';
 import { useTransporteStore } from '@/stores/useTransporteStore';
 import {useRouter} from 'vue-router'
@@ -16,14 +15,12 @@ const veiculo = ref({
 
 const salvar = () => {
     stores.adicionarVeiculo({...veiculo.value});
-    router.push('/transporte')
+    router.push('/lista')
 }
 </script>
 
 <template>
     <div class="cadastrar-veiculo">
-        <AppHeader title="Cadastrar Veículo" :show-back="true" />
-
         <div class="content">
             <form @submit.prevent="salvar" class="cadastro">
                 <div class="form-group">
