@@ -1,6 +1,6 @@
 <script setup>
-import Logo from "@/assets/logo.png"
 import ThemeButton from "@/components/buttons/ThemeButton.vue"
+import Logo from "@/assets/logo.png"
 </script>
 
 <template>
@@ -13,6 +13,7 @@ import ThemeButton from "@/components/buttons/ThemeButton.vue"
 </template>
 
 <style scoped>
+
 .header {
   position: fixed;
   top: 0;

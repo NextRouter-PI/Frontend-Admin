@@ -1,8 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useTransporteStore } from '@/stores/useTransporteStore';
-import AppHeader from '@/components/AppHeader.vue';
-import AppBottomNavigationBar from '@/components/AppBottomNavigationBar.vue';
 
 const store = useTransporteStore();
 const busca = ref('');
@@ -24,8 +22,6 @@ const veiculosFiltrados = computed(() => {
 
 <template>
   <div class="view-wrapper">
-    <AppHeader title="Veículos" show-back />
-
     <div class="content">
       <div class="search-container">
         <span class="mdi mdi-magnify search-icon"></span>
@@ -81,12 +77,10 @@ const veiculosFiltrados = computed(() => {
       <span class="mdi mdi-plus"></span>
     </button>
 
-    <AppBottomNavigationBar />
   </div>
 </template>
 
 <style scoped>
-/* O design exato que você pediu */
 .view-wrapper {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
@@ -97,7 +91,6 @@ const veiculosFiltrados = computed(() => {
   padding-bottom: 120px; 
 }
 
-/* Busca */
 .search-container {
   position: relative;
   margin-bottom: 16px;
@@ -120,7 +113,6 @@ const veiculosFiltrados = computed(() => {
   outline: none;
 }
 
-/* Filtros */
 .filter-chips {
   display: flex;
   gap: 8px;
@@ -141,7 +133,6 @@ const veiculosFiltrados = computed(() => {
   color: #f97316;
 }
 
-/* Card - Design Exato do Figma */
 .transport-card {
   background: white;
   border-radius: 16px;

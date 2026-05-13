@@ -1,12 +1,23 @@
 <script setup>
-import AppHeader from './components/AppHeader.vue';
-import AppBottomNavigationBar from './components/AppBottomNavigationBar.vue';
+import { useDeviceLayout } from "@/composables/useDeviceLayout";
+import AppHeader from "./components/layout/AppHeader.vue";
+import Sidebar from "./components/layout/AppSideBar.vue";
+import AppBottomNavigationBar from "./components/layout/AppBottomNavigationBar.vue";
+
+const { isMobile } = useDeviceLayout();
 </script>
 
 <template>
-  <div id="app">
-    <AppHeader />
-    <router-view />
-    <AppBottomNavigationBar />
+  <div class="app-layout">
+
+    <AppHeader/>
+    <Sidebar v-if="!isMobile" />
+
+    <main class="content">
+      <router-view />
+    </main>
+
+    <AppBottomNavigationBar v-if="isMobile" />
+
   </div>
 </template>
