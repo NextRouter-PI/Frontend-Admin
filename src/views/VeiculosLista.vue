@@ -1,8 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useTransporteStore } from '@/stores/useTransporteStore';
-import AppHeader from '@/components/AppHeader.vue';
-import AppBottomNavigationBar from '@/components/AppBottomNavigationBar.vue';
 import { useRouter } from 'vue-router';
 
 const store = useTransporteStore();
@@ -31,7 +29,6 @@ const cadastrar = () => {
 
 <template>
   <div class="view-wrapper">
-    <AppHeader title="Veículos" show-back />
 
     <div class="content">
       <div class="search-container">
@@ -88,7 +85,6 @@ const cadastrar = () => {
       <span class="mdi mdi-plus"></span>
     </button>
 
-    <AppBottomNavigationBar />
   </div>
 </template>
 
