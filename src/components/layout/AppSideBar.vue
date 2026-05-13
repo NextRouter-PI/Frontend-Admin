@@ -21,17 +21,17 @@ import { RouterLink } from "vue-router";
       </router-link>
 
       <router-link :to="`/usuario`" class="nav-item" title="Usuário">
-        <span class="mdi mdi-account"></span>
+        <span class="mdi mdi-account-circle"></span>
         <small>Usuário</small>
       </router-link>
 
       <router-link :to="`/transporte`" class="nav-item" title="Transporte">
-        <span class="mdi mdi-car"></span>
+        <span class="mdi mdi-bus"></span>
         <small>Transporte</small>
       </router-link>
 
       <router-link :to="`/lista`" class="nav-item" title="Lista">
-        <span class="mdi mdi-format-list-bulleted"></span>
+          <span class="mdi mdi-map-outline"></span>
         <small>Lista</small>
       </router-link>
 

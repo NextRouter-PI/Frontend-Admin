@@ -8,5 +8,15 @@ export const useTransporteStore = defineStore('transporte', {
             {id: 3, placa: 'QHN6714', modelo: 'Mercedes Sprinter', capacidade: 18, motorista: 'Roberto Carlos', status: 'Ativo'},
             {id: 4, placa: 'QNH6715', modelo: 'Mercedes Sprinter', capacidade: 18, motorista: 'Roberto Carlos', status: 'Ativo'}
         ]
-    })
+    }),
+    actions: {
+        adicionarVeiculo(novoVeiculo) {
+            this.veiculos.unshift({
+                id: Date.now(),
+                status: 'Ativo',
+                motorista: 'Não Atribuído',
+                ...novoVeiculo
+            });
+        }
+    }
 });

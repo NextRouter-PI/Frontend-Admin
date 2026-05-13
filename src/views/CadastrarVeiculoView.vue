@@ -15,7 +15,7 @@ const veiculo = ref({
 
 const salvar = () => {
     stores.adicionarVeiculo({...veiculo.value});
-    router.push('/transporte')
+    router.push('/lista')
 }
 </script>
 
