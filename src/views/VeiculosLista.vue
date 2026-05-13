@@ -22,7 +22,7 @@ const veiculosFiltrados = computed(() => {
 
 const router = useRouter();
 const cadastrar = () => {
-  router.push('/veiculos/novo');
+  router.push('/cadastro-veiculo');
 };
 
 </script>

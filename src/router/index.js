@@ -4,6 +4,7 @@ import VeiculosLista from '@/views/VeiculosLista.vue'
 import HomeView from '@/views/HomeView.vue'
 import TransportView from '@/views/TransportView.vue'
 import UserView from '@/views/UserView.vue'
+import CadastrarVeiculoView from '@/views/CadastrarVeiculoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       name: 'lista',
       component: VeiculosLista,
     },
+    {
+      path: '/cadastro-veiculo',
+      name: 'cadastro-veiculo',
+      component: CadastrarVeiculoView 
+    }
   ],
 })
 
