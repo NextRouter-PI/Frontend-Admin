@@ -10,14 +10,18 @@ const filtroAtivo = ref('Todas');
 
 const rotasFiltradas = computed(() => {
   const lista = store.rotas || [];
+
   return lista.filter(r => {
-    const correspondeBusca = r.origem.toLowerCase().includes(busca.value.toLowerCase()) ||
-                             r.destino.toLowerCase().includes(busca.value.toLowerCase()) ||
-                             r.horario.toLowerCase().includes(busca.value.toLowerCase());
-    
-    const statusParaFiltro = filtroAtivo.value === 'Ativas' ? 'Ativo' : filtroAtivo.value;
-    const correspondeFiltro = filtroAtivo.value === 'Todas' || r.status === statusParaFiltro;
-    
+    const correspondeBusca =
+      r.origem.toLowerCase().includes(busca.value.toLowerCase()) ||
+      r.destino.toLowerCase().includes(busca.value.toLowerCase()) ||
+      r.horario.toLowerCase().includes(busca.value.toLowerCase());
+
+    const correspondeFiltro =
+        filtroAtivo.value === 'Todas' ||
+        r.horario.startsWith('12') && filtroAtivo.value === '12h' ||
+        r.horario.startsWith('17') && filtroAtivo.value === '17h';
+
     return correspondeBusca && correspondeFiltro;
   });
 });
@@ -39,28 +43,22 @@ const rotasFiltradas = computed(() => {
             </div>
 
             <div class="filter-chips">
-                <button 
-                    v-for="f in ['Todas', '12h', '17h']" 
-                    :key="f"
-                    :class="['chip', { active: filtroAtivo === f }]"
-                    @click="filtroAtivo = f"
-                >
-                    {{ f }}
-                </button>
-            </div>
+            <button
+                v-for="f in ['Todas', '12h', '17h']"
+                :key="f"
+                :class="['chip', { active: filtroAtivo === f }]"
+                @click="filtroAtivo = f"
+            >
+                {{ f }}
+            </button>
+</div>
 
             <div class="list-container">
-                <div v-for="rota in rotasFiltradas" :key="rota.id" class="transport-card">
-                    <div class="card-header">
-                        <div class="header-main">
-                            <h3>{{ rota.origem }} → {{ rota.destino }}</h3>
-                            <p class="card-subtitle">{{ rota.horario }}</p>
-                        </div>
-                        <button class="menu-dots">
-                            <span class="mdi mdi-dots-vertical"></span>
-                        </button>
-                    </div>
-                </div>
+                  <div v-for="rota in rotasFiltradas" :key="rota.id" class="transport-card"></div>
+                  <div class="header">
+                  
+                  
+                  </div>
             </div>
         </div>
     </div>
@@ -69,5 +67,36 @@ const rotasFiltradas = computed(() => {
 </template>
 
 <style scoped>
+.view-wrapper {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  padding: 80px 0
+}
 
+.content { 
+  padding-bottom: 120px; 
+}
+
+/* Busca */
+.search-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 12px 12px 12px 44px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  outline: none;
+}
 </style>
