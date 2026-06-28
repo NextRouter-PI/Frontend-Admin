@@ -20,85 +20,164 @@ const salvar = () => {
 </script>
 
 <template>
+    <div class="top-bar">
+    <button class="back-button" @click="$router.back()">
+        <span class="fa-solid fa-arrow-left" style="color: rgb(0, 0, 0);"></span>
+    </button>
+    <h1>Editar Veículo</h1>
+</div>
     <div class="cadastrar-veiculo">
-        <div class="content">
-            <form @submit.prevent="salvar" class="cadastro">
-                <div class="form-group">
-                    <label>Placa <span>*</span></label>
-                    <input v-model="veiculo.placa" placeholder="ABC1234" required />
-                </div>
+        <form @submit.prevent="salvar" class="cadastro">
 
-                <div class="form-group">
-                    <label>Modelo <span>*</span></label>
-                    <input v-model="veiculo.modelo" placeholder="Mercedes Sprinter" required />
-                </div>
+            <div class="form-group">
+                <label>Placa<span>*</span></label>
+                <input
+                    v-model="veiculo.placa"
+                    placeholder="ABC 1234"
+                    required
+                />
+            </div>
 
-                <div class="form-group">
-                    <label>Ano <span>*</span></label>
-                    <input v-model="veiculo.ano" placeholder="2015" required />
-                </div>
+            <div class="form-group">
+                <label>Modelo<span>*</span></label>
+                <input
+                    v-model="veiculo.modelo"
+                    placeholder="Mercedes Sprinter"
+                    required
+                />
+            </div>
 
-                <div class="form-group">
-                    <label>Capacidade <span>*</span></label>
-                    <input v-model="veiculo.capacidade" placeholder="Número de lugares" required />
-                </div>
-            </form>
-        </div>
-        <div class="salvar-cancelar">
-            <button type="button" class="cancelar" @click="$router.back()">CANCELAR</button>
-            <button type="button" class="salvar" @click="salvar">SALVAR</button>
-        </div>
+            <div class="form-group">
+                <label>Ano<span>*</span></label>
+                <input
+                    v-model="veiculo.ano"
+                    placeholder="2015"
+                    required
+                />
+            </div>
+
+            <div class="form-group">
+                <label>Capacidade<span>*</span></label>
+                <input
+                    v-model="veiculo.capacidade"
+                    placeholder="Número de lugares"
+                    required
+                />
+            </div>
+
+            <button class="btn-salvar" type="submit">
+                SALVAR ALTERAÇÕES
+            </button>
+
+            <button
+                class="btn-cancelar"
+                type="button"
+                @click="$router.back()"
+            >
+                CANCELAR
+            </button>
+
+        </form>
     </div>
 </template>
-
 <style scoped>
+.top-bar{
+    padding: 100px 24px 0px 40px;
+    font-size: 28px;
+    display: flex;
+}
+
+.top-bar h1{
+    font-weight: 700;
+    font-size: 28px;
+    margin-left: 20px;
+}
+
 .cadastrar-veiculo {
     min-height: 100vh;
+    background: #fff;
 }
-.content {
-    padding: 24px 20px;
-    margin-top: 100px;
+
+.cadastro {
+    padding: 50px 24px 20px 40px;
 }
+
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 26px;
 }
+
 .form-group label {
     display: block;
-    font-weight: 600;
-    margin-bottom: 7px;
-    font-size: 1rem;
-    color: #000000;
+    font-size: 20px;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 10px;
 }
-.form-group label span {
-    color: #f97316;
+
+.form-group span {
+    color: #F28715;
     margin-left: 2px;
 }
+
 .form-group input {
     width: 100%;
-    padding: 10px;
-    border-radius: 7px;
-    border: 1px solid #000000;
-    font-size: 1rem;
+    height: 48px;
+
+    padding: 0 12px;
+
+    border: 1px solid #BDBDBD;
+    border-radius: 5px;
+
+    font-size: 15px;
+
     outline: none;
+
+    box-sizing: border-box;
 }
-.salvar-cancelar {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+
+.form-group input::placeholder {
+    color: #A9A9A9;
 }
-.cancelar {
+
+.btn-salvar {
+    width: 100%;
+    height: 48px;
+
+    margin-top: 30px;
+
+    background: #F28715;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    width: 100%;
+    height: 48px;
+
+    margin-top: 16px;
+
+    background: white;
+
     color: #F28715;
+
     border: 1px solid #F28715;
     border-radius: 5px;
-    padding: 7px;
-    font-weight: 400;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
 }
-.salvar {
-    background-color: #F28715;
-    color: #FFFFFF;
-    border-radius: 5px;
-    padding: 7px;
-    font-weight: 400;
+
+.btn-salvar:active,
+.btn-cancelar:active {
+    transform: scale(.98);
 }
 </style>
