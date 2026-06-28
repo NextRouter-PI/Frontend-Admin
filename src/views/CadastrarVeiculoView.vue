@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useTransporteStore } from '@/stores/useTransporteStore';
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const router = useRouter();
 const stores = useTransporteStore();
@@ -14,66 +14,46 @@ const veiculo = ref({
 });
 
 const salvar = () => {
-    stores.adicionarVeiculo({...veiculo.value});
+    stores.adicionarVeiculo({ ...veiculo.value });
     router.push('/lista')
 }
 </script>
 
 <template>
     <div class="top-bar">
-    <button class="back-button" @click="$router.back()">
-        <span class="fa-solid fa-arrow-left" style="color: rgb(0, 0, 0);"></span>
-    </button>
-    <h1>Cadastrar Veículo</h1>
-</div>
+        <button class="back-button" @click="$router.back()">
+            <span class="fa-solid fa-arrow-left" style="color: rgb(0, 0, 0);"></span>
+        </button>
+        <h1>Cadastrar Veículo</h1>
+    </div>
     <div class="cadastrar-veiculo">
         <form @submit.prevent="salvar" class="cadastro">
 
             <div class="form-group">
                 <label>Placa<span>*</span></label>
-                <input
-                    v-model="veiculo.placa"
-                    placeholder="ABC 1234"
-                    required
-                />
+                <input v-model="veiculo.placa" placeholder="ABC 1234" required />
             </div>
 
             <div class="form-group">
                 <label>Modelo<span>*</span></label>
-                <input
-                    v-model="veiculo.modelo"
-                    placeholder="Mercedes Sprinter"
-                    required
-                />
+                <input v-model="veiculo.modelo" placeholder="Mercedes Sprinter" required />
             </div>
 
             <div class="form-group">
                 <label>Ano<span>*</span></label>
-                <input
-                    v-model="veiculo.ano"
-                    placeholder="2015"
-                    required
-                />
+                <input v-model="veiculo.ano" placeholder="2015" required />
             </div>
 
             <div class="form-group">
                 <label>Capacidade<span>*</span></label>
-                <input
-                    v-model="veiculo.capacidade"
-                    placeholder="Número de lugares"
-                    required
-                />
+                <input v-model="veiculo.capacidade" placeholder="Número de lugares" required />
             </div>
 
             <button class="btn-salvar" type="submit">
                 SALVAR
             </button>
 
-            <button
-                class="btn-cancelar"
-                type="button"
-                @click="$router.back()"
-            >
+            <button class="btn-cancelar" type="button" @click="$router.back()">
                 CANCELAR
             </button>
 
@@ -81,13 +61,13 @@ const salvar = () => {
     </div>
 </template>
 <style scoped>
-.top-bar{
+.top-bar {
     padding: 100px 24px 0px 40px;
     font-size: 28px;
     display: flex;
 }
 
-.top-bar h1{
+.top-bar h1 {
     font-weight: 700;
     font-size: 28px;
     margin-left: 20px;
