@@ -7,15 +7,20 @@ const store = useTransporteStore();
 const busca = ref('');
 const filtroAtivo = ref('Todas');
 
+const alterarStatus = (id) => {
+  store.alterarStatus(id);
+  menuAberto.value = null;
+};
+
 const veiculosFiltrados = computed(() => {
   const lista = store.veiculos || [];
   return lista.filter(v => {
     const correspondeBusca = v.placa.toLowerCase().includes(busca.value.toLowerCase()) ||
-                             v.modelo.toLowerCase().includes(busca.value.toLowerCase());
-    
+      v.modelo.toLowerCase().includes(busca.value.toLowerCase());
+
     const statusParaFiltro = filtroAtivo.value === 'Ativas' ? 'Ativo' : filtroAtivo.value;
     const correspondeFiltro = filtroAtivo.value === 'Todas' || v.status === statusParaFiltro;
-    
+
     return correspondeBusca && correspondeFiltro;
   });
 });
@@ -25,6 +30,11 @@ const cadastrar = () => {
   router.push('/cadastro-veiculo');
 };
 
+const menuAberto = ref(null);
+
+const toggleMenu = (id) => {
+  menuAberto.value = menuAberto.value === id ? null : id;
+};
 </script>
 
 <template>
@@ -33,20 +43,12 @@ const cadastrar = () => {
     <div class="content">
       <div class="search-container">
         <span class="mdi mdi-magnify search-icon"></span>
-        <input 
-          v-model="busca" 
-          type="text" 
-          placeholder="Busque por placa, modelo..." 
-        />
+        <input v-model="busca" type="text" placeholder="Busque por placa, modelo..." />
       </div>
 
       <div class="filter-chips">
-        <button 
-          v-for="f in ['Todas', 'Ativas', 'Manutenção']" 
-          :key="f"
-          :class="['chip', { active: filtroAtivo === f }]"
-          @click="filtroAtivo = f"
-        >
+        <button v-for="f in ['Todas', 'Ativas', 'Manutenção']" :key="f" :class="['chip', { active: filtroAtivo === f }]"
+          @click="filtroAtivo = f">
           {{ f }}
         </button>
       </div>
@@ -58,11 +60,27 @@ const cadastrar = () => {
               <h3>{{ veiculo.placa }}</h3>
               <p class="card-subtitle">{{ veiculo.modelo }}</p>
             </div>
-            <button class="menu-dots">
-              <span class="mdi mdi-dots-vertical"></span>
-            </button>
+
+            <div class="menu-container">
+              <button class="menu-dots" @click="toggleMenu(veiculo.id)">
+                <span class="mdi mdi-dots-vertical"></span>
+              </button>
+
+              <div v-if="menuAberto === veiculo.id" class="menu-dropdown">
+                <button @click="router.push(`/editar-veiculo/${veiculo.id}`)">
+                  Editar informações do veículo
+                </button>
+
+                <button @click="alterarStatus(veiculo.id)">
+                  {{ veiculo.status === 'Ativo'
+                    ? 'Enviar para a manutenção'
+                    : 'Retirar de manutenção'
+                  }}
+                </button>
+              </div>
+            </div>
           </div>
-          
+
           <div class="card-details">
             <div class="detail-item">
               <span class="mdi mdi-seat-passenger" style="color: #000000;"></span>
@@ -73,7 +91,7 @@ const cadastrar = () => {
               <span>{{ veiculo.motorista }}</span>
             </div>
           </div>
-          
+
           <span :class="['status-tag', veiculo.status.toLowerCase()]">
             {{ veiculo.status }}
           </span>
@@ -95,8 +113,8 @@ const cadastrar = () => {
   padding: 80px 0
 }
 
-.content { 
-  padding-bottom: 120px; 
+.content {
+  padding-bottom: 120px;
 }
 
 .search-container {
@@ -169,6 +187,57 @@ const cadastrar = () => {
   margin: 12px 0;
 }
 
+.menu-container {
+  position: relative;
+}
+
+.menu-dots {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #000;
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 34px;
+  right: 0;
+
+  width: 195px;
+
+  background: #E8830F;
+  border-radius: 4px;
+  overflow: hidden;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+
+  z-index: 100;
+}
+
+.menu-dropdown button {
+  width: 100%;
+
+  padding: 14px 12px;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+  font-size: 14px;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.menu-dropdown button:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, .35);
+}
+
+.menu-dropdown button:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
 .detail-item {
   display: flex;
   align-items: center;
@@ -185,8 +254,15 @@ const cadastrar = () => {
   font-weight: 700;
 }
 
-.status-tag.ativo { background-color: #BDFFAF; color: #000000; }
-.status-tag.manutenção { background-color: #FFBA70; color: #000000; }
+.status-tag.ativo {
+  background-color: #BDFFAF;
+  color: #000000;
+}
+
+.status-tag.manutenção {
+  background-color: #FFBA70;
+  color: #000000;
+}
 
 .fab-add {
   position: fixed;
