@@ -24,7 +24,7 @@ const salvar = () => {
     <button class="back-button" @click="$router.back()">
         <span class="fa-solid fa-arrow-left" style="color: rgb(0, 0, 0);"></span>
     </button>
-    <h1>Editar Veículo</h1>
+    <h1>Cadastrar Veículo</h1>
 </div>
     <div class="cadastrar-veiculo">
         <form @submit.prevent="salvar" class="cadastro">
@@ -66,7 +66,7 @@ const salvar = () => {
             </div>
 
             <button class="btn-salvar" type="submit">
-                SALVAR ALTERAÇÕES
+                SALVAR
             </button>
 
             <button
