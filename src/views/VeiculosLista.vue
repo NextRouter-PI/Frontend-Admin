@@ -67,7 +67,7 @@ const toggleMenu = (id) => {
               </button>
 
               <div v-if="menuAberto === veiculo.id" class="menu-dropdown">
-                <button @click="router.push(`/editar-veiculo/${veiculo.id}`)">
+                <button @click="router.push(`/veiculos/editar/${veiculo.id}`)">
                   Editar informações do veículo
                 </button>
 
