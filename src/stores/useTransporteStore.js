@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 
+
 export const useTransporteStore = defineStore('transporte', {
     state: () => ({
         veiculos: [
@@ -17,6 +18,16 @@ export const useTransporteStore = defineStore('transporte', {
                 motorista: 'Não Atribuído',
                 ...novoVeiculo
             });
+        },
+        alterarStatus(id) {
+            const veiculo = this.veiculos.find(v => v.id === id);
+
+            if (!veiculo) return;
+
+            veiculo.status =
+                veiculo.status === 'Ativo'
+                    ? 'Manutenção'
+                    : 'Ativo';
         }
     }
 });

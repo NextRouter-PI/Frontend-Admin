@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import VeiculosLista from '@/views/VeiculosLista.vue'
 import HomeView from '@/views/HomeView.vue'
-import TransportView from '@/views/TransportView.vue'
+import RotasView from '@/views/RotasView.vue'
 import UserView from '@/views/UserView.vue'
 import CadastrarVeiculoView from '@/views/CadastrarVeiculoView.vue'
 
@@ -22,12 +22,12 @@ const router = createRouter({
     {
       path: '/transporte',
       name: 'transporte',
-      component: TransportView,
+      component: VeiculosLista,
     },
     {
       path: '/lista',
       name: 'lista',
-      component: VeiculosLista,
+      component: RotasView,
     },
     {
       path: '/cadastro-veiculo',
