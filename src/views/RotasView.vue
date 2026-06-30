@@ -1,5 +1,5 @@
 <template>
-    <h1>Transporte</h1>
+    <h1>Rotas</h1>
 </template>
 
 <style scoped>
