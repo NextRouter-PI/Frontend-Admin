@@ -28,6 +28,17 @@ export const useTransporteStore = defineStore('transporte', {
                 veiculo.status === 'Ativo'
                     ? 'Manutenção'
                     : 'Ativo';
+        },
+         atualizarVeiculo(id, dados) {
+    const index = this.veiculos.findIndex(v => v.id == id)
+
+    if (index !== -1) {
+        this.veiculos[index] = {
+            ...this.veiculos[index],
+            ...dados
         }
     }
+}
+    }
+   
 });

@@ -5,6 +5,7 @@ import HomeView from '@/views/HomeView.vue'
 import RotasView from '@/views/RotasView.vue'
 import UserView from '@/views/UserView.vue'
 import CadastrarVeiculoView from '@/views/CadastrarVeiculoView.vue'
+import EditarVeiculoView from '@/views/EditarVeiculoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/cadastro-veiculo',
       name: 'cadastro-veiculo',
       component: CadastrarVeiculoView 
+    },
+    {
+    path: '/veiculos/editar/:id',
+    name: 'editar-veiculo',
+    component: EditarVeiculoView
     }
   ],
 })
