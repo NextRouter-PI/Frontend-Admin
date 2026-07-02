@@ -6,6 +6,11 @@ import { useCompanyStore } from "@/stores/useCompanyStore";
 
 const companyStore = useCompanyStore()
 const companyName = computed(() => companyStore.name)
+
+function logout() {
+  companyStore.clearCompany()
+  window.location.href = import.meta.env.VITE_LOGIN_URL
+}
 </script>
 
 <template>
@@ -41,8 +46,36 @@ const companyName = computed(() => companyStore.name)
       </router-link>
 
     </nav>
+
+    <div class="nav logout-section">
+      <button class="nav-item logout-item" @click="logout" title="Sair">
+        <span class="mdi mdi-logout"></span>
+        <small>Sair</small>
+      </button>
+    </div>
   </aside>
 </template>
+
+<style scoped>
+.logout-section {
+  margin-top: auto;
+  padding-bottom: 20px;
+}
+
+.logout-item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--text-muted);
+}
+
+.logout-item:hover span {
+  color: #d32f2f !important;
+}
+</style>
 
 <style scoped>
 .sidebar {

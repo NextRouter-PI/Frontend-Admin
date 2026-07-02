@@ -1,6 +1,14 @@
 <script setup>
+import { useCompanyStore } from "@/stores/useCompanyStore";
 import ThemeButton from "@/components/buttons/ThemeButton.vue"
 import Logo from "@/assets/logo.png"
+
+const companyStore = useCompanyStore()
+
+function logout() {
+  companyStore.clearCompany()
+  window.location.href = import.meta.env.VITE_LOGIN_URL
+}
 </script>
 
 <template>
@@ -8,9 +16,43 @@ import Logo from "@/assets/logo.png"
     <RouterLink to="/" class="logo">
       <img :src="Logo" alt="Logo">
     </RouterLink>
-    <ThemeButton />
+    <div class="header-actions">
+      <button class="logout-btn" @click="logout" title="Sair">
+        <span class="mdi mdi-logout"></span>
+      </button>
+      <ThemeButton />
+    </div>
   </header>
 </template>
+
+<style scoped>
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.logout-btn span {
+  color: var(--text-muted);
+  font-size: 26px;
+  transition: all 0.4s ease;
+}
+
+.logout-btn:hover span {
+  color: #d32f2f;
+  transform: scale(1.1);
+}
+</style>
 
 <style scoped>
 

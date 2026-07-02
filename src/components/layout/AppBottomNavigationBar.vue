@@ -1,4 +1,12 @@
 <script setup>
+import { useCompanyStore } from "@/stores/useCompanyStore";
+
+const companyStore = useCompanyStore()
+
+function logout() {
+  companyStore.clearCompany()
+  window.location.href = import.meta.env.VITE_LOGIN_URL
+}
 </script>
 
 <template>
@@ -18,8 +26,39 @@
     <router-link :to="`/usuario`" class="nav-item">
       <span class="mdi mdi-account-circle"></span>
     </router-link>
+
+    <button class="nav-item logout-btn" @click="logout" title="Sair">
+      <span class="mdi mdi-logout"></span>
+    </button>
   </footer>
 </template>
+
+<style scoped>
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 0;
+}
+
+.logout-btn span {
+  font-size: 26px;
+  transition: all 0.4s ease;
+}
+
+.logout-btn:hover span {
+  color: #d32f2f;
+  transform: scale(1.1);
+}
+</style>
 
 <style scoped>
 .bottom-nav {
