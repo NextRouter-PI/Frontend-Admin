@@ -1,6 +1,11 @@
 <script setup>
+import { computed } from 'vue'
 import Logo from "@/assets/logo.png"
 import { RouterLink } from "vue-router";
+import { useCompanyStore } from "@/stores/useCompanyStore";
+
+const companyStore = useCompanyStore()
+const companyName = computed(() => companyStore.name)
 </script>
 
 <template>
@@ -9,7 +14,7 @@ import { RouterLink } from "vue-router";
     <RouterLink :to="`/`" class="logo">
       <div class="logo-content">
         <img :src="Logo" alt="Logo">
-        <h1>NextRouter</h1>
+        <h1>{{ companyName || 'NextRouter' }}</h1>
       </div>
     </RouterLink>
 

@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTransporteStore } from '@/stores/useTransporteStore'
+import { useCompanyStore } from '@/stores/useCompanyStore'
 import { Bar } from 'vue-chartjs'
 
 import {
@@ -90,6 +91,7 @@ const chartOptions = {
 
 const router = useRouter()
 const store = useTransporteStore()
+const companyStore = useCompanyStore()
 
 const data = computed(() => {
   const hoje = new Date()
@@ -121,7 +123,7 @@ const backHome = () => {
     <div class="content">
 
       <div class="titulo">
-        <h2>Gerenciamento:</h2>
+        <h2>{{ companyStore.name ? companyStore.name : 'Gerenciamento' }}:</h2>
         <span>{{ data }}</span>
       </div>
 
