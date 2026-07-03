@@ -12,6 +12,10 @@ const route = useRoute()
 const companyStore = useCompanyStore()
 
 onMounted(() => {
+  if (route.query.token) {
+    companyStore.setToken(route.query.token)
+    companyStore.fetchData()
+  }
   if (route.query.company) {
     companyStore.setCompany(route.query.company)
   }
