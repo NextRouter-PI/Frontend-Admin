@@ -30,37 +30,69 @@ const rotasFiltradas = computed(() => {
 
 <template>
     <div class="view-wrapper">
-        <AppHeader title="Rotas" show-back />
-    
-        <div class="content">
-            <div class="search-container">
-                <span class="mdi mdi-magnify search-icon"></span>
-                <input 
-                    v-model="busca" 
-                    type="text" 
-                    placeholder="Busque por origem, destino, horário..." 
-                />
-            </div>
+    <AppHeader title="Veículos" show-back />
 
-            <div class="filter-chips">
-            <button
-                v-for="f in ['Todas', '12h', '17h']"
-                :key="f"
-                :class="['chip', { active: filtroAtivo === f }]"
-                @click="filtroAtivo = f"
-            >
-                {{ f }}
-            </button>
-</div>
+    <div class="content">
+      <div class="search-container">
+        <span class="mdi mdi-magnify search-icon"></span>
+        <input 
+          v-model="busca" 
+          type="text" 
+          placeholder="Busque por rotas..." 
+        />
+      </div>
+    </div>
+    <div class="filter">
+         <button 
+        @click="filtroAtivo = 'Todas'" 
+        :class="{ 'ativo': filtroAtivo === 'Todas' }"
+        class="btn-filtro"
+      >
+        Todas
+      </button>
+      <button 
+        @click="filtroAtivo = '12h'" 
+        :class="{ 'ativo': filtroAtivo === '12h' }"
+        class="btn-filtro"
+      >
+        12h
+      </button>
+      <button 
+        @click="filtroAtivo = '17h'" 
+        :class="{ 'ativo': filtroAtivo === '17h' }"
+        class="btn-filtro"
+      >
+        17h
+      </button>
+    </div>
+    <div class="list-rotas">
+         <div 
+        v-for="rota in rotasFiltradas" 
+        :key="rota.id" 
+        class="card-rota"
+      >
+        <span class="badge-horario">{{ rota.horario }}</span>
 
-            <div class="list-container">
-                  <div v-for="rota in rotasFiltradas" :key="rota.id" class="transport-card"></div>
-                  <div class="header">
-                  
-                  
-                  </div>
-            </div>
+        <div class="conteudo-card">
+          <div class="linha-destino">
+          <span class="mdi mdi-map-marker"></span>
+            <h4 class="texto-destino">{{ rota.origem }}</h4>
+          </div>
+
+          <div class="linha-ponto">
+            <span class="mdi mdi-circle-medium"></span>
+            <p class="texto-ponto">{{ rota.destino }}</p>
+          </div>
+
+          <div class="info-logistica">
+            <p>Van: <span class="destaque-info">{{ rota.van }}</span></p>
+            <p>Motorista: <span class="destaque-info">{{ rota.motorista }}</span></p>
+          </div>
         </div>
+
+    </div>
+
+    </div>
     </div>
         <AppBottomNavigationBar />
 
@@ -70,17 +102,17 @@ const rotasFiltradas = computed(() => {
 .view-wrapper {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
-  padding: 80px 0
+  padding: 80px 0;
 }
 
 .content { 
-  padding-bottom: 120px; 
+    padding: 0 16px 120px; 
 }
 
 /* Busca */
 .search-container {
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .search-icon {
@@ -99,4 +131,31 @@ const rotasFiltradas = computed(() => {
   background-color: white;
   outline: none;
 }
+.filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.btn-filtro {
+   padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  font-size: 0.85rem;
+  }
+.btn-filtro.ativo {
+   background-color: #fff7ed;
+  border-color: #f97316;
+  color: #f97316;
+}
+
+.card-rota {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
 </style>
