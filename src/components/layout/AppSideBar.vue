@@ -1,5 +1,5 @@
 <script setup>
-import Logo from "@/assets/logo.png"
+import Logo from "@/assets/images/logo.png"
 import { RouterLink } from "vue-router";
 </script>
 
@@ -25,14 +25,14 @@ import { RouterLink } from "vue-router";
         <small>Usuário</small>
       </router-link>
 
-      <router-link :to="`/transporte`" class="nav-item" title="Transporte">
+      <router-link :to="`/veiculos`" class="nav-item" title="Veículos">
         <span class="mdi mdi-bus"></span>
-        <small>Transporte</small>
+        <small>Veículos</small>
       </router-link>
 
-      <router-link :to="`/lista`" class="nav-item" title="Lista">
+      <router-link :to="`/rotas`" class="nav-item" title="Rotas">
           <span class="mdi mdi-map-outline"></span>
-        <small>Lista</small>
+        <small>Rotas</small>
       </router-link>
 
     </nav>

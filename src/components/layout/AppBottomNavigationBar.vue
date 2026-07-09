@@ -3,11 +3,11 @@
 
 <template>
   <footer class="bottom-nav">
-    <router-link :to="`/transporte`" class="nav-item">
+    <router-link :to="`/veiculos`" class="nav-item">
       <span class="mdi mdi-bus"></span>
     </router-link>
 
-    <router-link :to="`/lista`" class="nav-item">
+    <router-link :to="`/rotas`" class="nav-item">
       <span class="mdi mdi-map-outline"></span>
     </router-link>
 
