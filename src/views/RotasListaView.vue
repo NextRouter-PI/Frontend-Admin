@@ -29,54 +29,62 @@ const rotasFiltradas = computed(() => {
 </script>
 
 <template>
-    <div class="view-wrapper">
+  <div class="view-wrapper">
     <AppHeader title="Veículos" show-back />
 
     <div class="content">
       <div class="search-container">
         <span class="mdi mdi-magnify search-icon"></span>
-        <input 
-          v-model="busca" 
-          type="text" 
-          placeholder="Busque por rotas..." 
+        <input
+          v-model="busca"
+          type="text"
+          placeholder="Busque por rotas..."
         />
       </div>
     </div>
     <div class="filter">
-         <button 
-        @click="filtroAtivo = 'Todas'" 
+      <button
+        @click="filtroAtivo = 'Todas'"
         :class="{ 'ativo': filtroAtivo === 'Todas' }"
         class="btn-filtro"
       >
         Todas
+
       </button>
-      <button 
-        @click="filtroAtivo = '12h'" 
+
+      <button
+        @click="filtroAtivo = '12h'"
         :class="{ 'ativo': filtroAtivo === '12h' }"
         class="btn-filtro"
       >
         12h
+
       </button>
-      <button 
-        @click="filtroAtivo = '17h'" 
+      <button
+        @click="filtroAtivo = '17h'"
         :class="{ 'ativo': filtroAtivo === '17h' }"
         class="btn-filtro"
       >
         17h
+
       </button>
     </div>
+
     <div class="list-rotas">
-         <div 
-        v-for="rota in rotasFiltradas" 
-        :key="rota.id" 
+      <div
+        v-for="rota in rotasFiltradas"
+        :key="rota.id"
         class="card-rota"
-      >
-        <span class="badge-horario">{{ rota.horario }}</span>
+        >
 
         <div class="conteudo-card">
+
           <div class="linha-destino">
-          <span class="mdi mdi-map-marker"></span>
-            <h4 class="texto-destino">{{ rota.origem }}</h4>
+            <div class="marcador">
+              <span class="mdi mdi-map-marker"></span>
+              <h4 class="texto-destino">{{ rota.origem }}</h4>
+            </div>
+            <span class="badge-horario">{{ rota.horario }}</span>
           </div>
 
           <div class="linha-ponto">
@@ -85,16 +93,23 @@ const rotasFiltradas = computed(() => {
           </div>
 
           <div class="info-logistica">
-            <p>Van: <span class="destaque-info">{{ rota.van }}</span></p>
-            <p>Motorista: <span class="destaque-info">{{ rota.motorista }}</span></p>
+            <div class="dots">
+              <span class="mdi mdi-dots-vertical"></span>
+            </div>
+            <div>
+              <p>Van: <span class="destaque-info">{{ rota.van }}</span></p>
+              <p>Motorista: <span class="destaque-info">{{ rota.motorista }}</span></p>
+            </div>
+
           </div>
+
         </div>
 
-    </div>
+      </div>
 
     </div>
-    </div>
-        <AppBottomNavigationBar />
+  </div>
+  <AppBottomNavigationBar />
 
 </template>
 
@@ -102,17 +117,17 @@ const rotasFiltradas = computed(() => {
 .view-wrapper {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
-  padding: 80px 0;
+  padding: 80px 0
 }
 
-.content { 
-    padding: 0 16px 120px; 
+.content {
+    padding-bottom: 16px;
 }
 
 /* Busca */
 .search-container {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .search-icon {
@@ -134,17 +149,17 @@ const rotasFiltradas = computed(() => {
 .filter {
   display: flex;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
 }
 .btn-filtro {
-   padding: 6px 16px;
+  padding: 6px 16px;
   border-radius: 20px;
   border: 1px solid #d1d5db;
   background-color: white;
   font-size: 0.85rem;
   }
 .btn-filtro.ativo {
-   background-color: #fff7ed;
+  background-color: #fff7ed;
   border-color: #f97316;
   color: #f97316;
 }
@@ -154,8 +169,52 @@ const rotasFiltradas = computed(() => {
   border-radius: 16px;
   padding: 20px;
   margin-bottom: 14px;
-  border: 1px solid #f3f4f6;
+  border: 1px solid #000000;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.linha-destino {
+  display: flex;
+  justify-content: space-between;
+}
+
+.marcador {
+  display: flex;
+  gap: 10px;
+}
+
+.mdi-map-marker {
+  color: #f97316;
+}
+
+.badge-horario {
+  font-size: 12px;
+  padding: 3px 5px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.linha-ponto {
+  display: flex;
+  margin: 10px 0;
+  gap: 10px;
+}
+
+.mdi-circle-medium {
+  color: #f97316;
+}
+
+.info-logistica {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dots {
+  margin-top: 10px;
+}
+
+.mdi-dots-vertical {
+  font-size: 25px;
 }
 
 </style>
