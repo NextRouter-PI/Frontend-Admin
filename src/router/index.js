@@ -2,6 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import VeiculosLista from '@/views/VeiculosLista.vue'
 import RotasListaView from '@/views/RotasListaView.vue'
+import HomeView from '@/views/HomeView.vue'
+import RotasView from '@/views/RotasView.vue'
+import UserView from '@/views/UserView.vue'
+import CadastrarVeiculoView from '@/views/CadastrarVeiculoView.vue'
+import EditarVeiculoView from '@/views/EditarVeiculoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,12 +14,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: VeiculosLista,
+      component: HomeView,
     },
     {
       path: '/usuario',
       name: 'usuario',
-      component: VeiculosLista,
+      component: UserView,
     },
     {
       path: '/transporte',
@@ -24,8 +29,18 @@ const router = createRouter({
     {
       path: '/lista',
       name: 'lista',
-      component: VeiculosLista,
+      component: RotasView,
     },
+    {
+      path: '/cadastro-veiculo',
+      name: 'cadastro-veiculo',
+      component: CadastrarVeiculoView 
+    },
+    {
+    path: '/veiculos/editar/:id',
+    name: 'editar-veiculo',
+    component: EditarVeiculoView
+    }
   ],
 })
 

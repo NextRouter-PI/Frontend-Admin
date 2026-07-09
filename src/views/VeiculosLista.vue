@@ -1,48 +1,54 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useTransporteStore } from '@/stores/useTransporteStore';
-import AppHeader from '@/components/AppHeader.vue';
-import AppBottomNavigationBar from '@/components/AppBottomNavigationBar.vue';
+import { useRouter } from 'vue-router';
 
 const store = useTransporteStore();
 const busca = ref('');
 const filtroAtivo = ref('Todas');
 
+const alterarStatus = (id) => {
+  store.alterarStatus(id);
+  menuAberto.value = null;
+};
+
 const veiculosFiltrados = computed(() => {
   const lista = store.veiculos || [];
   return lista.filter(v => {
     const correspondeBusca = v.placa.toLowerCase().includes(busca.value.toLowerCase()) ||
-                             v.modelo.toLowerCase().includes(busca.value.toLowerCase());
-    
+      v.modelo.toLowerCase().includes(busca.value.toLowerCase());
+
     const statusParaFiltro = filtroAtivo.value === 'Ativas' ? 'Ativo' : filtroAtivo.value;
     const correspondeFiltro = filtroAtivo.value === 'Todas' || v.status === statusParaFiltro;
-    
+
     return correspondeBusca && correspondeFiltro;
   });
 });
+
+const router = useRouter();
+const cadastrar = () => {
+  router.push('/cadastro-veiculo');
+};
+
+const menuAberto = ref(null);
+
+const toggleMenu = (id) => {
+  menuAberto.value = menuAberto.value === id ? null : id;
+};
 </script>
 
 <template>
   <div class="view-wrapper">
-    <AppHeader title="Veículos" show-back />
 
     <div class="content">
       <div class="search-container">
         <span class="mdi mdi-magnify search-icon"></span>
-        <input 
-          v-model="busca" 
-          type="text" 
-          placeholder="Busque por placa, modelo..." 
-        />
+        <input v-model="busca" type="text" placeholder="Busque por placa, modelo..." />
       </div>
 
       <div class="filter-chips">
-        <button 
-          v-for="f in ['Todas', 'Ativas', 'Manutenção']" 
-          :key="f"
-          :class="['chip', { active: filtroAtivo === f }]"
-          @click="filtroAtivo = f"
-        >
+        <button v-for="f in ['Todas', 'Ativas', 'Manutenção']" :key="f" :class="['chip', { active: filtroAtivo === f }]"
+          @click="filtroAtivo = f">
           {{ f }}
         </button>
       </div>
@@ -54,22 +60,38 @@ const veiculosFiltrados = computed(() => {
               <h3>{{ veiculo.placa }}</h3>
               <p class="card-subtitle">{{ veiculo.modelo }}</p>
             </div>
-            <button class="menu-dots">
-              <span class="mdi mdi-dots-vertical"></span>
-            </button>
+
+            <div class="menu-container">
+              <button class="menu-dots" @click="toggleMenu(veiculo.id)">
+                <span class="mdi mdi-dots-vertical"></span>
+              </button>
+
+              <div v-if="menuAberto === veiculo.id" class="menu-dropdown">
+                <button @click="router.push(`/veiculos/editar/${veiculo.id}`)">
+                  Editar informações do veículo
+                </button>
+
+                <button @click="alterarStatus(veiculo.id)">
+                  {{ veiculo.status === 'Ativo'
+                    ? 'Enviar para a manutenção'
+                    : 'Retirar de manutenção'
+                  }}
+                </button>
+              </div>
+            </div>
           </div>
-          
+
           <div class="card-details">
             <div class="detail-item">
-              <span class="mdi mdi-account-group-outline"></span>
-              <span>{{ veiculo.capacidade }} Lugares</span>
+              <span class="mdi mdi-seat-passenger" style="color: #000000;"></span>
+              <span>{{ veiculo.capacidade }} Lugares </span>
             </div>
             <div class="detail-item">
-              <span class="mdi mdi-account-outline"></span>
+              <span class="mdi mdi-account-outline" style="color: #000000;"></span>
               <span>{{ veiculo.motorista }}</span>
             </div>
           </div>
-          
+
           <span :class="['status-tag', veiculo.status.toLowerCase()]">
             {{ veiculo.status }}
           </span>
@@ -77,27 +99,24 @@ const veiculosFiltrados = computed(() => {
       </div>
     </div>
 
-    <button class="fab-add">
+    <button class="fab-add" @click="cadastrar">
       <span class="mdi mdi-plus"></span>
     </button>
 
-    <AppBottomNavigationBar />
   </div>
 </template>
 
 <style scoped>
-/* O design exato que você pediu */
 .view-wrapper {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
   padding: 80px 0
 }
 
-.content { 
-  padding-bottom: 120px; 
+.content {
+  padding-bottom: 120px;
 }
 
-/* Busca */
 .search-container {
   position: relative;
   margin-bottom: 16px;
@@ -113,14 +132,13 @@ const veiculosFiltrados = computed(() => {
 
 .search-container input {
   width: 100%;
-  padding: 12px 12px 12px 44px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
+  padding: 10px 10px 10px 44px;
+  border-radius: 10px;
+  border: 1px solid #f97316;
   background-color: white;
   outline: none;
 }
 
-/* Filtros */
 .filter-chips {
   display: flex;
   gap: 8px;
@@ -141,13 +159,12 @@ const veiculosFiltrados = computed(() => {
   color: #f97316;
 }
 
-/* Card - Design Exato do Figma */
 .transport-card {
   background: white;
   border-radius: 16px;
   padding: 20px;
   margin-bottom: 14px;
-  border: 1px solid #f3f4f6;
+  border: 1px solid #000000;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
@@ -170,6 +187,57 @@ const veiculosFiltrados = computed(() => {
   margin: 12px 0;
 }
 
+.menu-container {
+  position: relative;
+}
+
+.menu-dots {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #000;
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 34px;
+  right: 0;
+
+  width: 195px;
+
+  background: #E8830F;
+  border-radius: 4px;
+  overflow: hidden;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+
+  z-index: 100;
+}
+
+.menu-dropdown button {
+  width: 100%;
+
+  padding: 14px 12px;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+  font-size: 14px;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.menu-dropdown button:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, .35);
+}
+
+.menu-dropdown button:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
 .detail-item {
   display: flex;
   align-items: center;
@@ -178,19 +246,24 @@ const veiculosFiltrados = computed(() => {
   color: #9ca3af;
 }
 
-/* Tags de Status */
 .status-tag {
   display: inline-block;
   padding: 4px 12px;
   border-radius: 8px;
-  font-size: 0.75rem;
+  font-size: 0.80rem;
   font-weight: 700;
 }
 
-.status-tag.ativo { background-color: #d1fae5; color: #065f46; }
-.status-tag.manutenção { background-color: #fee2e2; color: #991b1b; }
+.status-tag.ativo {
+  background-color: #BDFFAF;
+  color: #000000;
+}
 
-/* FAB - Botão Grafite */
+.status-tag.manutenção {
+  background-color: #FFBA70;
+  color: #000000;
+}
+
 .fab-add {
   position: fixed;
   bottom: 100px;
