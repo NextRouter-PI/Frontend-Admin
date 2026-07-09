@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import VeiculosLista from '@/views/VeiculosLista.vue'
+import RotasListaView from '@/views/RotasListaView.vue'
 import HomeView from '@/views/HomeView.vue'
 import RotasView from '@/views/RotasView.vue'
 import UserView from '@/views/UserView.vue'
@@ -23,7 +24,7 @@ const router = createRouter({
     {
       path: '/transporte',
       name: 'transporte',
-      component: VeiculosLista,
+      component: RotasListaView,
     },
     {
       path: '/lista',
